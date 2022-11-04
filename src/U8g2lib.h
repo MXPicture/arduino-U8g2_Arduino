@@ -45,7 +45,7 @@
 #ifndef U8G2LIB_HH
 #define U8G2LIB_HH
 
-#ifdef ARDUINO
+#if defined(ARDUINO) || defined(EPOXY_DUINO)
 #include <Arduino.h>
 #include <Print.h>
 #endif
