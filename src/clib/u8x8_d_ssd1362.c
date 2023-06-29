@@ -37,7 +37,10 @@
   SSD1362: 
     256 x 64 (ssd1322: 480 x 128)
     16 gray scale
-  
+
+
+  Note: Currently the external IREF is activated.
+  Maybe we need a constructor with internal IREF
   
 */
 #include "u8x8.h"
@@ -325,7 +328,7 @@ static const u8x8_display_info_t u8x8_ssd1362_256x64_display_info =
   /* data_setup_time_ns = */ 10,
   /* write_pulse_width_ns = */ 150,	/* ssd1362: cycle time is 300ns, so use 300/2 = 150 */
   /* tile_width = */ 32,		/* 256 pixel, so we require 32 bytes for this */
-  /* tile_hight = */ 8,
+  /* tile_height = */ 8,
   /* default_x_offset = */ 0,	/* this is the byte offset (there are two pixel per byte with 4 bit per pixel) */
   /* flipmode_x_offset = */ 0,
   /* pixel_width = */ 256,
@@ -342,6 +345,7 @@ static const uint8_t u8x8_d_ssd1362_256x64_init_seq[] = {
   
   U8X8_CA(0xfd, 0x12),            	/* unlock */
   U8X8_C(0xae),		                /* display off */
+  U8X8_CA(0x23, 0x00), //POR 0x00; Disable fade mode
   U8X8_CA(0x81, 0x9f), //Set contrast
   
 /*
@@ -438,7 +442,7 @@ static const u8x8_display_info_t u8x8_ssd1362_206x36_display_info =
   /* data_setup_time_ns = */ 10,
   /* write_pulse_width_ns = */ 150,	/* ssd1362: cycle time is 300ns, so use 300/2 = 150 */
   /* tile_width = */ 26,		/* 26*8 = 208 */
-  /* tile_hight = */ 5,                /* 5*8 = 40 */
+  /* tile_height = */ 5,                /* 5*8 = 40 */
   /* default_x_offset = */ 0,	/* this is the byte offset (there are two pixel per byte with 4 bit per pixel) */
   /* flipmode_x_offset = */ 25, 
   /* pixel_width = */ 206,
@@ -455,6 +459,7 @@ static const uint8_t u8x8_d_ssd1362_206x36_init_seq[] = {
   
   U8X8_CA(0xfd, 0x12),            	/* unlock */
   U8X8_C(0xae),		                /* display off */
+  U8X8_CA(0x23, 0x00), //POR 0x00; Disable fade mode
   U8X8_CA(0x81, 0x9f), //Set contrast
   
 /*
